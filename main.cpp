@@ -2,6 +2,22 @@
 #include "math.h"
 #include <vector>
 
+class Rectangle
+{
+private:
+  int width;
+  int height;
+public: Rectangle(int width, int height){
+  this -> width = width;
+  this -> height = height;
+}
+  int area()
+  {
+    return width * height;
+  }
+};
+
+
 int subtract(int x, int y){
       return x-y;
     }
@@ -17,8 +33,11 @@ int subtract(int x, int y){
 
   class Circle
 {
-  public:
+  private:
   int radius;
+  public: Circle(int radius){
+    this -> radius = radius;
+  }
   int area(int radius)
   {
     return M_PI* pow(radius,2);
@@ -31,10 +50,13 @@ int subtract(int x, int y){
 };
 
 class Point{
-  public:
+  private:
   double x;
   double y;
-  
+  public: Point(double x, double y){
+    this -> x =x;
+    this -> y = y;
+  }
 
 
   int distance_to_origin(){
@@ -47,10 +69,20 @@ class Point{
 };
 
 class Line{
-  public:
+  private:
   Point p1;
   Point p2;
-
+  /*double length(){
+    return p1.distance_to_point(p2);
+  }
+  double distance_to_point(Point p){
+   double numerator = abs((p2.y-p1.y)/ (p2.x-p1.x) )
+  }
+*/
+public: Line(Point p1, Point p2){
+  this -> p1 = p1;
+  this -> p2 = p2;
+}
   double length(Point p1, Point p2){
     return sqrt(pow((p1.x-p2.x),2) + pow((p1.y-p2.y),2));
   }
@@ -65,13 +97,20 @@ class Triangle{
   Point p1;
   Point p2;
   Point p3;
+  /*
+  Triangle(Point a, Point b, Point c){
+    p1 = a;
+    p2 = b;
+    p3 = c;
+  }
   
+  */
 
   double area(Point p1, Point p2, Point p3){
     Line l;
     double base = l.length( p2, p3);
     double height = l.distance_to_point(p2,p3, p1);
-    return 0.5 * base *height;
+    return 0.5 * base * height;
   }
 
 };
@@ -95,11 +134,11 @@ class Polygon{
     double perimeter = 0.0;
     Line ll;
     for(int i = 0; i< amt_of_points; i++){
-      perimeter += ll.length(p[i],p[i+1]);
+      perimeter += ll.length(p[i],p[i+1]);//p[i].distance_to_point(p[i+1]);
 
     }
 
-    perimeter += ll.length(p[amt_of_points -1], p[0]);
+    perimeter += ll.length(p[amt_of_points -1], p[0]);// p[0].distace_to_point(p[p.size()-1]);
     return perimeter;
   }
   
